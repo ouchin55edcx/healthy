@@ -13,7 +13,7 @@
         <div class="bg-blue-500 p-4 flex justify-between items-center">
             <!--   left side -->
             <div class="flex items-center">
-                <img src="storage/images/téléchargement-removebg-preview.png" width="50" alt="LOGO" class="mr-2">
+                <img src="storage/images/logo.png" width="50" alt="LOGO" class="mr-2">
                 {{-- <a href="#" class="inline-block p-2 text-blue-200 mr-2 hover:text-blue-100">Home</a>
             <a href="#" class="inline-block p-2 text-blue-200 hover:text-blue-100">About</a> --}}
             </div>
@@ -52,29 +52,29 @@
             </div>
 
             <!--   left -->
-            <div class="md:w-1/2"><img src="storage/images/pexels-louis-bauer-249348.jpg" alt="Hospital"
+            <div class="md:w-1/2"><img src="storage/images/img1.jpg" alt="Hospital"
                     class="w-full rounded shadow-2xl h-auto max-h-full sm:max-h-screen md:max-h-full lg:max-h-screen xl:max-h-full">
             </div>
         </div>
         <!-- services -->
         <div class="flex py-16 px-10 bg-blue-500 text-blue-200 text-center">
             <div class="mr-3 mb-4 text-center">
-                <img src="storage/images/pexels-mart-production-7089019.jpg" alt="Service image"
+                <img src="storage/service2.jpg" alt="Service image"
                     class="w-full rounded border-solid border-2 border-blue-200">
                 <p>Emergency Care</p>
             </div>
             <div class="mr-3 mb-4 text-center">
-                <img src="storage/images/pexels-mart-production-7089019.jpg" alt="Service image"
+                <img src="storage/service2.jpg" alt="Service image"
                     class="w-full rounded border-solid border-2 border-blue-200">
                 <p>Specialized Treatments</p>
             </div>
             <div class="mr-3 mb-4 text-center">
-                <img src="storage/images/pexels-mart-production-7089019.jpg" alt="Service image"
+                <img src="storage/service2.jpg" alt="Service image"
                     class="w-full rounded border-solid border-2 border-blue-200">
                 <p>Wellness Programs</p>
             </div>
             <div class="mr-3 mb-4 text-center">
-                <img src="storage/images/pexels-mart-production-7089019.jpg" alt="Service image"
+                <img src="storage/service2.jpg" alt="Service image"
                     class="w-full rounded border-solid border-2 border-blue-200">
                 <p>Advanced Technology</p>
             </div>
