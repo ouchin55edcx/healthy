@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,15 +30,8 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // pages route 
+Route::get('/dashboard',[AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/doctor',[DoctorController::class,'index'])->name('doctor.dashboard');
 
-Route::get('/doctor', function () {
-    return view('doctor.dashboard');
-})->name('doctor.dashboard');
-
-Route::get('/patient', function () {
-    return view('patient.page');
-})->name('patient.page');
+Route::get('/patient', [PatientController::class,'index'])->name('patient.page');
