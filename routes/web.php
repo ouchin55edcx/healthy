@@ -30,8 +30,14 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // pages route 
-Route::get('/dashboard',[AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[AdminController::class, 'index'])->middleware(['auth', 'verified','role:admin'])->name('dashboard');
 
-Route::get('/doctor',[DoctorController::class,'index'])->name('doctor.dashboard');
 
-Route::get('/patient', [PatientController::class,'index'])->name('patient.page');
+Route::middleware(['auth', 'role:doctor'])->group(function () {
+    Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.dashboard');
+
+});
+
+Route::middleware(['auth', 'role:patient'])->group(function () {
+    Route::get('/patient', [PatientController::class, 'index'])->name('patient.page');
+});
