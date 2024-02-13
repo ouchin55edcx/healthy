@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->enum('role',['admin','doctor','patient']);
-            $table->foreignId('specialty_id')->nullable()->constrained('specialties');
+            $table->foreignId('speciality_id')->nullable()->constrained('specialities');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
