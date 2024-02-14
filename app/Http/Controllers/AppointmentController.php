@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -10,9 +11,13 @@ class AppointmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getDoctors()
     {
-        return view('patient.appointment');
+        $doctors = User::where('role', 'doctor')
+            ->with('speciality')
+            ->get();
+        // dd($doctors);
+        return view('patient.appointment', compact('doctors'));
     }
 
     /**

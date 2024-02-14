@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -10,4 +11,5 @@ class DoctorController extends Controller
     {
         return view('doctor.dashboard');
     }
+
 }

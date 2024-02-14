@@ -50,5 +50,8 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/doctorProfile', [DoctorProfileController::class, 'index'])->name('patient.doctorProfile');
 });
 Route::middleware(['auth', 'role:patient'])->group(function () {
-    Route::get('/appointments', [AppointmentController::class, 'index'])->name('patient.appointment');
+    Route::get('/appointments', [AppointmentController::class, 'getDoctors'])->name('patient.appointment');
 });
+
+// get doctors 
+

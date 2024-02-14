@@ -10,4 +10,6 @@ class DoctorProfileController extends Controller
     {
         return view('patient.doctorProfile');
     }
+
+    
 }
