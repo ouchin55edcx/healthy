@@ -30,11 +30,11 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     @foreach ($doctors as $doctor)
         <div class="max-w-xs mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-            <a href="{{ route('patient.doctorProfile') }}" class="flex justify-center">
+            <a href="{{ route('patient.doctorProfile', ['id' => $doctor->id]) }}">
                 <img class="h-32 w-auto object-cover rounded-full" src="{{ $doctor->image }}" alt="Doctor Image">
             </a>
             <div class="px-4 py-3 text-center">
-                <a href="{{ route('patient.doctorProfile') }}">
+                <a href="{{ route('patient.doctorProfile', ['id' => $doctor->id]) }}">
                     <h3 class="text-gray-900 font-semibold text-lg mb-1 tracking-tight">{{ $doctor->name }}</h3>
                 </a>
                 <p class="text-gray-600 text-sm mb-2">Specialty: {{ $doctor->speciality->specialtyName }}</p>

@@ -4,13 +4,14 @@
     <section class="container mx-auto mt-8 flex">
         <div class="w-1/3 pr-8">
             <!-- Doctor Image -->
-            <img src="storage/images/docotr1.png" alt="Dr. John Doe" class="w-60 h-auto rounded-full border-2 border-blue-500">
+            <img src="{{ $doctor->image }}" alt="Dr. John Doe" class="w-60 h-auto rounded-full border-2 border-blue-500">
         </div>
         <div class="w-2/3 items-center mt-12 ">
             <!-- Doctor Details -->
-            <h2 class="text-3xl font-semibold mb-4">Dr. John Doe</h2>
+            <h2 class="text-3xl font-semibold mb-4">{{ $doctor->name }}</h2>
             <p class="text-gray-700">
-                Dr. John Doe is a dedicated and experienced professional in the field of [specialty]. With [number]
+                {{ $doctor->name }} is a dedicated and experienced professional in the field of
+                {{ $doctor->speciality->specialtyName }}. With 5
                 years of experience, Dr. Doe has been providing top-notch medical care to patients. Lorem ipsum dolor
                 sit amet, consectetur adipiscing elit.
             </p>
