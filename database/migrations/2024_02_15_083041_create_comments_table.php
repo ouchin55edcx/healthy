@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('rating')->nullable();
             $table->timestamps();
 
-            // Define foreign keys
             $table->foreign('patient_id')->references('id')->on('users');
             $table->foreign('doctor_id')->references('id')->on('users');
         });
