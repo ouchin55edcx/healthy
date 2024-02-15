@@ -8,6 +8,8 @@ use App\Http\Controllers\DoctorProfile;
 use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UrgentAppointmentController;
+use App\Models\UrgentAppointment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,7 +59,12 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::post('/comment/add', [CommentController::class, 'store'])->name('comment.store');
 });
 
-Route::post('/book-appointment', [AppointmentController::class,'bookAppointment'])->name('book-appointment');
+
+Route::middleware(['auth', 'role:patient'])->group(function () {
+    Route::get('/urgent-appointment', [UrgentAppointmentController::class, 'index'])->name('patient.urgent-appointment');
+});
+
+Route::post('/book-appointment', [AppointmentController::class, 'bookAppointment'])->name('book-appointment');
 
 
 // get doctors 
