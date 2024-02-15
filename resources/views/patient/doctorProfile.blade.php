@@ -21,17 +21,26 @@
     <section class="container mx-auto mt-8">
         <!-- Appointment Times Section -->
         <h2 class="text-3xl font-semibold mb-4">Appointment Times</h2>
-        <div class="bg-white p-4 rounded-md shadow-md">
-            <!-- Display available appointment times with booking status -->
-            <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4">
+            <form action="{{ route('book-appointment') }}" method="post">
+                @csrf
                 @foreach ($availableHours as $hour)
-                    <label class="border p-4 text-center bg-green-500">
-                        <input type="checkbox" name="selectedHour" value="{{ $hour->hour_id }}">
+                    <input type="hidden" value="{{ $doctor->id }}" name="doctor_id">
+                    <label
+                        class="border p-4 text-center @if ($hour->isBooked) bg-red-500 @else bg-green-500 @endif"
+                        id="hour_{{ $hour->hour_id }}" onclick="this.form.submit();">
+                        <input type="radio" name="selectedHour" value="{{ $hour->hour_id }}" style="display: none;">
                         <p class="text-xl font-semibold">{{ $hour->start_time }} - {{ $hour->end_time }}</p>
-                        <p class="text-white">Available</p>
+                        <p class="text-white" id="status_{{ $hour->hour_id }}">
+                            @if ($hour->isBooked)
+                                Booked
+                            @else
+                                Available
+                            @endif
+                        </p>
                     </label>
                 @endforeach
-            </div>
+            </form>
         </div>
     </section>
 

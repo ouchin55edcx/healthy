@@ -57,4 +57,7 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::post('/comment/add', [CommentController::class, 'store'])->name('comment.store');
 });
 
+Route::post('/book-appointment', [AppointmentController::class,'bookAppointment'])->name('book-appointment');
+
+
 // get doctors 
