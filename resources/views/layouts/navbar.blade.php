@@ -56,8 +56,16 @@
             <a href="{{ route('patient.appointment') }}"
                 class="hover:bg-blue-700 px-3 py-1.5 text-md rounded-md text-amber-500 hidden sm:inline">Appointment</a>
             <a href="#"
-                class="hover:bg-blue-700 text-amber-500 px-3 py-1.5 rounded-md text-sm hidden sm:inline">Sher Your
-                Advunture Now </a>
+                class="hover:bg-blue-700 text-amber-500 px-3 py-1.5 rounded-md text-sm hidden sm:inline">Profile </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-dropdown-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-dropdown-link>
+                </form>
         </div>
     </header>
 
