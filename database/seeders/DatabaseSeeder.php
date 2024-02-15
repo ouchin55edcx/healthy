@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         ->create();
 
         \App\Models\User::factory(10)->create();
+        $this->call(AvailableHoursTableSeeder::class);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
