@@ -53,12 +53,11 @@
                         <!-- Repeat the star rating SVGs for additional stars -->
                         <span class="text-yellow-400 text-xs font-semibold ml-1">5.0</span>
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-lg font-bold text-gray-900">$599</span>
-                        <button onclick="addToFavorites('doctor1')"
-                            class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 rounded-md text-xs px-3 py-1.5">Add
-                            to Favorites</button>
-                    </div>
+                    <form action="{{ route('add-to-favorites') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+                        <button type="submit" class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 rounded-md text-xs px-3 py-1.5">Add to Favorites</button>
+                    </form>
                 </div>
             </div>
         @endforeach

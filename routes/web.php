@@ -8,6 +8,7 @@ use App\Http\Controllers\DoctorProfile;
 use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\UrgentAppointmentController;
 use App\Models\UrgentAppointment;
 use Illuminate\Support\Facades\Route;
@@ -67,4 +68,11 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
 Route::post('/book-appointment', [AppointmentController::class, 'bookAppointment'])->name('book-appointment');
 
 
-// get doctors 
+// add to favorite 
+
+// routes/web.php
+Route::middleware(['auth', 'role:patient'])->group(function () {
+    Route::post('/add-to-favorites', [FavoriteController::class, 'addToFavorites'])->name('add-to-favorites');
+});
+
+
