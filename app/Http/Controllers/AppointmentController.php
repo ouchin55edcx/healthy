@@ -14,30 +14,32 @@ class AppointmentController extends Controller
      */
     public function getDoctors()
     {
+
         $doctors = User::where('role', 'doctor')
             ->with('speciality')
             ->get();
 
-        
         return view('patient.appointment', compact('doctors'));
     }
 
+
     public function bookAppointment(Request $request)
-{
-    // Assuming you have authentication and get the current patient ID
-    $patientId = auth()->user()->id;
+    {
+        // Assuming you have authentication and get the current patient ID
+        $patientId = auth()->user()->id;
 
-    // Create a new appointment record
-    $appointment = new Appointment();
-    $appointment->doctor_id = $request->input('doctor_id'); // Replace with the actual doctor ID
-    $appointment->patient_id = $patientId;
-    $appointment->hour_id = $request->input('selectedHour');
-    $appointment->appointment_date = now()->toDateString(); // Set the appointment date as today
-    $appointment->save();
+        // Create a new appointment record
+        $appointment = new Appointment();
+        $appointment->doctor_id = $request->input('doctor_id'); // Replace with the actual doctor ID
+        $appointment->patient_id = $patientId;
+        $appointment->hour_id = $request->input('selectedHour');
+        $appointment->appointment_date = now()->toDateString(); // Set the appointment date as today
+        $appointment->is_booked = true; // Set is_booked to true
+        $appointment->save();
 
-    // Redirect back to the page or any other page you prefer
-    return redirect()->back()->with('success', 'Appointment booked successfully');
-}
+        // Redirect back to the page or any other page you prefer
+        return redirect()->back()->with('success', 'Appointment booked successfully');
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('hour_id');
             $table->date('appointment_date');
+            $table->boolean('is_booked')->default(false);
             $table->timestamps();
 
             // Define foreign keys

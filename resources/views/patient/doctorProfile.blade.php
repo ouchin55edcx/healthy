@@ -26,13 +26,18 @@
                 @csrf
                 @foreach ($availableHours as $hour)
                     <input type="hidden" value="{{ $doctor->id }}" name="doctor_id">
+                    @php
+                        $appointment = $doctorAppointments->firstWhere('hour_id', $hour->hour_id);
+                        $isBooked = $appointment && $appointment->is_booked === 1;
+                    @endphp
                     <label
-                        class="border p-4 text-center @if ($hour->isBooked) bg-red-500 @else bg-green-500 @endif"
+                        class="border p-4 text-center @if ($isBooked) bg-red-500 opacity-50 cursor-not-allowed @else bg-green-500 @endif"
                         id="hour_{{ $hour->hour_id }}" onclick="this.form.submit();">
-                        <input type="radio" name="selectedHour" value="{{ $hour->hour_id }}" style="display: none;">
+                        <input type="radio" name="selectedHour" value="{{ $hour->hour_id }}" style="display: none;"
+                            @if ($isBooked) disabled @endif>
                         <p class="text-xl font-semibold">{{ $hour->start_time }} - {{ $hour->end_time }}</p>
-                        <p class="text-white" id="status_{{ $hour->hour_id }}">
-                            @if ($hour->isBooked)
+                        <p class="text-black" id="status_{{ $hour->hour_id }}">
+                            @if ($isBooked)
                                 Booked
                             @else
                                 Available
@@ -41,6 +46,8 @@
                     </label>
                 @endforeach
             </form>
+
+
         </div>
     </section>
 
