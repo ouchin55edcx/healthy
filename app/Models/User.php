@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->attributes['role'];
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

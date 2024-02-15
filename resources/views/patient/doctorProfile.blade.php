@@ -52,24 +52,24 @@
         <h2 class="text-3xl font-semibold mb-4">Patient Reviews</h2>
         <div class="bg-white p-4 rounded-md shadow-md">
             <!-- Add a form for patients to write comments -->
-            <form class="mb-4">
+            <form action="{{ route('comment.store') }}" method="post">
+                @csrf
+                <input type="hidden" value="{{$doctor->id}}" name="doctor_id">
                 <label for="comment" class="block text-sm font-medium text-gray-700">Share your experience:</label>
-                <textarea id="comment" name="comment" rows="4"
-                    class="mt-1 p-2 block w-full border border-gray-300 rounded-md bg-white shadow-sm focus:outline-none focus:border-sky-500 focus:ring focus:ring-sky-200"></textarea>
+                <textarea id="comment" name="comment" rows="4" class="mt-1 p-2 block w-full border border-gray-300 rounded-md bg-white shadow-sm focus:outline-none focus:border-sky-500 focus:ring focus:ring-sky-200"></textarea>
+        
                 <div class="flex items-center mt-2">
                     <span class="mr-2 text-gray-700">Rate:</span>
-                    <!-- Add star rating component here -->
                     <div id="starRating" class="flex">
-                        <span class="cursor-pointer text-yellow-400 text-2xl" onclick="setRating(1)">★</span>
-                        <span class="cursor-pointer text-yellow-400 text-2xl" onclick="setRating(2)">★</span>
-                        <span class="cursor-pointer text-yellow-400 text-2xl" onclick="setRating(3)">★</span>
-                        <span class="cursor-pointer text-yellow-400 text-2xl" onclick="setRating(4)">★</span>
-                        <span class="cursor-pointer text-yellow-400 text-2xl" onclick="setRating(5)">★</span>
+                        <!-- Star rating component here -->
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span class="cursor-pointer text-yellow-400 text-2xl" onclick="setRating({{ $i }})">★</span>
+                        @endfor
                     </div>
+                    <input type="hidden" name="rating" id="rating" value="1">
                 </div>
-                <button type="submit"
-                    class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">Submit
-                    Review</button>
+        
+                <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">Submit Review</button>
             </form>
 
             <!-- Display existing reviews -->

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DoctorProfile;
 use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +53,8 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::get('/appointments', [AppointmentController::class, 'getDoctors'])->name('patient.appointment');
 });
+Route::middleware(['auth', 'role:patient'])->group(function () {
+    Route::post('/comment/add', [CommentController::class, 'store'])->name('comment.store');
+});
 
 // get doctors 
-
