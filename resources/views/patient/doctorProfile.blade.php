@@ -17,34 +17,22 @@
             </p>
         </div>
     </section>
+
     <section class="container mx-auto mt-8">
         <!-- Appointment Times Section -->
         <h2 class="text-3xl font-semibold mb-4">Appointment Times</h2>
         <div class="bg-white p-4 rounded-md shadow-md">
             <!-- Display available appointment times with booking status -->
-            <div class="grid grid-cols-2 gap-4 ">
-                <a href="#" class="border p-4 text-center bg-red-500">
-                    <p class="text-xl font-semibold">9:00 - 10:00</p>
-                    <p class="text-white">Booked</p>
-                </a>
-
-                <a href="#" class="border p-4 text-center bg-green-500">
-                    <p class="text-xl font-semibold">10:00 - 12:00</p>
-                    <p class="text-white">Available</p>
-                </a>
-
-                <a href="#" class="border p-4 text-center bg-green-500">
-                    <p class="text-xl font-semibold">14:00 - 16:00</p>
-                    <p class="text-white">Available</p>
-                </a>
-
-                <a href="#" class="border p-4 text-center bg-green-500">
-                    <p class="text-xl font-semibold">16:00 - 18:00</p>
-                    <p class="text-white">Available</p>
-                </a>
+            <div class="grid grid-cols-2 gap-4">
+                @foreach ($availableHours as $hour)
+                    <label class="border p-4 text-center bg-green-500">
+                        <input type="checkbox" name="selectedHour" value="{{ $hour->hour_id }}">
+                        <p class="text-xl font-semibold">{{ $hour->start_time }} - {{ $hour->end_time }}</p>
+                        <p class="text-white">Available</p>
+                    </label>
+                @endforeach
             </div>
         </div>
-
     </section>
 
     <section class="container mx-auto m-8">
@@ -79,7 +67,7 @@
             <!-- Display existing reviews -->
             <div>
                 <h3 class="text-2xl font-semibold mb-2">What our patients are saying:</h3>
-        
+
                 @forelse ($comments as $comment)
                     <div class="border-t border-gray-300 pt-2">
                         <p class="text-gray-700">{{ $comment->comment }}</p>
