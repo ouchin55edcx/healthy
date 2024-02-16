@@ -9,9 +9,12 @@ class Speciality extends Model
 {
     use HasFactory;
 
-    public function user() {
-        
+    protected $table = 'specialities';
+    protected $fillable = ['specialtyName'];
+
+    public function user()
+    {
+
         return $this->belongsTo(User::class);
     }
-
 }
