@@ -12,9 +12,10 @@ class AdminController extends Controller
     public function index()
     {
         $specialities = Speciality::all();
+        $totlaSpeciality = Speciality::count();
 
-        // dd($specialities);
+        // dd($totlaSpeciality);
 
-        return view('admin.dashboard', compact('specialities'));
+        return view('admin.dashboard', compact('specialities', 'totlaSpeciality'));
     }
 }

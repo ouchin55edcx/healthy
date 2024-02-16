@@ -9,6 +9,7 @@ use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\UrgentAppointmentController;
 use App\Models\UrgentAppointment;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,12 @@ Route::post('/book-appointment', [AppointmentController::class, 'bookAppointment
 // routes/web.php
 Route::middleware(['auth', 'role:patient'])->group(function () {
     Route::post('/add-to-favorites', [FavoriteController::class, 'addToFavorites'])->name('add-to-favorites');
+});
+
+
+// add specialty 
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('/add-specialty', [SpecialityController::class, 'create'])->name('addSpecialty');
 });
 
 

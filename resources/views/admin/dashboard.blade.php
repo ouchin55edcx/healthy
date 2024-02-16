@@ -26,7 +26,7 @@
                 </div>
                 <div class="text-3xl">
                     <!-- Display Total Specialties dynamically -->
-                    Total Specialties
+                    {{ $totlaSpeciality }}
                 </div>
             </div>
 
@@ -50,19 +50,23 @@
             <h2 class="text-2xl font-bold mb-4">Specialties</h2>
 
             <!-- Add New Specialty Section -->
-            <form id="addSpecialtyForm" action="#" method="POST"
+            <div 
                 class="flex flex-col gap-4 p-6 bg-gray-100 rounded-md shadow-md">
                 <!-- CSRF token goes here -->
-                <div class="flex flex-col">
-                    <label for="newSpecialty" class="text-sm font-medium text-gray-700 mb-1">New Specialty:</label>
-                    <input type="text" name="newSpecialty" id="newSpecialty" placeholder="Enter new specialty"
-                        class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
-                </div>
+                <form id="addSpecialtyForm" action="{{ route('addSpecialty') }}" method="POST" class="mb-4">
+                    @csrf
+                    <div class="flex flex-col">
+                        <label for="newSpecialty" class="text-sm font-medium text-gray-700 mb-1">New Specialty:</label>
+                        <input type="text" name="newSpecialty" id="newSpecialty" placeholder="Enter new specialty"
+                            class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                    </div>
 
-                <button type="submit" class="button bg-blue-500 text-white hover:bg-blue-700 py-2 px-4 rounded-md">
-                    Add New Specialty
-                </button>
-            </form>
+
+                    <button type="submit" class="button bg-blue-500 text-white hover:bg-blue-700 py-2 px-4 rounded-md">
+                        Add New Specialty
+                    </button>
+                </form>
+            </div>
 
             <div x-data="{ showModal: false, editedSpecialty: 'SpecialtyName' }">
                 @foreach ($specialities as $speciality)

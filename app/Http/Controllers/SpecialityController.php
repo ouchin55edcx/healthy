@@ -18,9 +18,12 @@ class SpecialityController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $newSpecialty = $request->input('newSpecialty');
+        Speciality::create(['specialtyName' => $newSpecialty]);
+
+        return redirect()->back();
     }
 
     /**
