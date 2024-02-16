@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('specialities', function (Blueprint $table) {
             $table->id();
             $table->string('specialtyName');
+            $table->boolean('isDelete')->default(false);
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $specialities = Speciality::all();
+        $specialities = Speciality::where('isDelete', 0)->get();
         $totlaSpeciality = Speciality::count();
 
         // dd($totlaSpeciality);

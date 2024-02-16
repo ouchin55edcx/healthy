@@ -63,6 +63,8 @@ class SpecialityController extends Controller
      */
     public function destroy(Speciality $speciality)
     {
-        //
+        $speciality->update(['isDelete' => true]);
+    
+        return redirect()->route('dashboard');
     }
 }

@@ -77,9 +77,13 @@ Route::middleware(['auth', 'role:patient'])->group(function () {
 });
 
 
-// add specialty 
+//  specialty 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/add-specialty', [SpecialityController::class, 'create'])->name('addSpecialty');
+});
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::delete('/specialties/{speciality}', [SpecialityController::class, 'destroy'])->name('specialties.destroy');
+
 });
 
 
