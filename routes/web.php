@@ -95,3 +95,5 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 //medicaments 
 Route::post('/medicaments', [MedicamentController::class, 'store'])->name('medicaments.store');
+//delete
+Route::delete('/medicaments/{id}', [MedicamentController::class, 'destroy'])->name('medicaments.destroy');

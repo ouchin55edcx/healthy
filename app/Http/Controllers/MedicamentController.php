@@ -18,4 +18,12 @@ class MedicamentController extends Controller
 
         return redirect()->back()->with('success', 'Medicament added successfully');
     }
+
+        public function destroy($id)
+    {
+        $medicament = Medicament::findOrFail($id);
+        $medicament->delete();
+
+        return redirect()->back()->with('success', 'Medicament deleted successfully');
+    }
 }
