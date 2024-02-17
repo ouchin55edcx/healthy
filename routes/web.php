@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DoctorProfile;
 use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MedicamentController;
@@ -106,5 +107,6 @@ Route::put('/medicaments/{id}', [MedicamentController::class, 'update'])->name('
 //doctor
 Route::post('/medications', [DoctorController::class, 'store'])->name('medications.store');
 
-
-Route::post('/generate-certificate/{patient_id}/{doctor_id}', 'CertificateController@generateCertificate')->name('generate-certificate');
+// generate-certificate
+Route::match(['get', 'post'], '/certificate/{patient_id}/{doctor_id}', [CertificateController::class, 'index'])
+    ->name('doctor.certificate');
