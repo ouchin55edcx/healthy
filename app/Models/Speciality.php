@@ -17,4 +17,8 @@ class Speciality extends Model
 
         return $this->belongsTo(User::class);
     }
+    public function medicaments()
+    {
+        return $this->hasMany(Medicament::class);
+    }
 }

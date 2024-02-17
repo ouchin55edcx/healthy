@@ -125,40 +125,25 @@
         <div class="card bg-white rounded shadow-lg p-8 w-full text-center rounded-2xl">
             <h2 class="text-2xl font-bold mb-4">Medicament</h2>
             <!-- Add New Specialty Button -->
-            <form id="addMedicamentForm" action="#" method="POST"
-                class="flex flex-col gap-4 p-6 bg-gray-100 rounded-md shadow-md">
-                <!-- CSRF token goes here -->
+            <form action="{{ route('medicaments.store') }}" method="post">
+                @csrf
+                <label for="medicamentName">Medicament Name:</label>
+                <input type="text" name="medicamentName" id="medicamentName" required>
 
-                <div class="flex flex-col">
-                    <label for="newMedicament" class="text-sm font-medium text-gray-700 mb-1">New Medicament:</label>
-                    <input type="text" name="newMedicament" id="newMedicament" placeholder="Enter new medicament"
-                        class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
-                </div>
+                <label for="speciality_id">Speciality:</label>
+                <select name="speciality_id" id="speciality_id" required>
+                    @foreach ($specialities as $speciality)
+                        <option value="{{ $speciality->id }}">{{ $speciality->specialtyName }}</option>
+                    @endforeach
+                </select>
 
-                <div class="flex flex-col">
-                    <label for="specialty" class="text-sm font-medium text-gray-700 mb-1">Specialty:</label>
-                    <select id="specialty" name="specialty"
-                        class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
-                        <!-- Dummy data for demonstration -->
-                        <option value="1">Specialty 1</option>
-                        <option value="2">Specialty 2</option>
-                        <!-- Repeat for other specialties -->
-                    </select>
-                </div>
-
-                <button type="submit" class="button bg-blue-500 text-white hover:bg-blue-700 py-2 px-4 rounded-md">
-                    Add New Medicament
-                </button>
+                <button type="submit">Add Medicament</button>
             </form>
-
-
-
-
             <!-- Displayed Medicaments -->
-            <div x-data="{ showModal: false, editedMedicament: 'MedicamentName' }">
+            <div x-data="{ showModal: false, editedMedicament: 'MedicamentName', editedSpecialtyId: 1 }">
                 <div class="medicament mt-4 border-t border-gray-300 pt-4">
                     <div class="flex justify-between items-center">
-                        <p class="text-lg font-semibold">MedicamentName</p>
+                        <p class="text-lg font-semibold" x-text="editedMedicament"></p>
                         <div class="flex space-x-2">
                             <button @click="showModal = true"
                                 class="button bg-yellow-500 text-white hover:bg-yellow-700 px-3 py-1 rounded">
@@ -191,6 +176,19 @@
                                 <input type="text" name="medicamentName" x-model="editedMedicament"
                                     class="input border border-gray-300 rounded mb-4 w-full px-3 py-2">
 
+                                <div class="flex flex-col">
+                                    <label for="editSpecialty"
+                                        class="text-sm font-medium text-gray-700 mb-1">Specialty:</label>
+                                    <select id="editSpecialty" name="editSpecialty" x-model="editedSpecialtyId"
+                                        class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                                        <!-- Dynamically populate options based on available specialties -->
+                                        @foreach ($specialities as $specialty)
+                                            <option value="{{ $specialty->id }}">{{ $specialty->specialtyName }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="flex justify-end">
                                     <button @click="showModal = false"
                                         class="button bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 rounded mr-2">
@@ -206,8 +204,8 @@
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
 </x-app-layout>
 
 <script>

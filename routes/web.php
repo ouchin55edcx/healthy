@@ -9,6 +9,8 @@ use App\Http\Controllers\DoctorProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MedicamentController;
+use App\Http\Controllers\MedicamentsController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\UrgentAppointmentController;
 use App\Models\UrgentAppointment;
@@ -90,3 +92,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/specialties/{speciality}', [SpecialityController::class, 'update'])->name('specialities.update');
 });
+
+//medicaments 
+Route::post('/medicaments', [MedicamentController::class, 'store'])->name('medicaments.store');
