@@ -105,3 +105,6 @@ Route::put('/medicaments/{id}', [MedicamentController::class, 'update'])->name('
 
 //doctor
 Route::post('/medications', [DoctorController::class, 'store'])->name('medications.store');
+
+
+Route::post('/generate-certificate/{patient_id}/{doctor_id}', 'CertificateController@generateCertificate')->name('generate-certificate');

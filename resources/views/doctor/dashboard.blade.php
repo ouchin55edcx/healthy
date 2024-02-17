@@ -66,8 +66,6 @@
                 </div>
             </div>
 
-            <!-- Tickets Updates Section -->
-{{-- doctor.dashboard.blade.php --}}
 
             <section class="flex flex-col p-4 w-full max-w-sm flex-none bg-gray-100 min-h-0 overflow-auto">
                 <h1 class="font-semibold mb-3">
@@ -95,12 +93,19 @@
                                     <footer class="text-gray-500 mt-2 text-sm">
                                         Created at: {{ $appointment->created_at->format('l H:i') }}
                                     </footer>
+                                    <form action="{{ route('generate-certificate', ['patient_id' => $appointment->patient_id, 'doctor_id' => $appointment->doctor_id]) }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+                                            Generate Certificate
+                                        </button>
+                                    </form>
                                 </div>
                             </article>
                         </li>
                     @endforeach
                 </ul>
             </section>
+
 
         </main>
     </div>
