@@ -11,12 +11,20 @@ class Appointment extends Model
 
     public function doctor()
     {
-        return $this->belongsTo(user::class, 'doctor_id', 'id');
+        return $this->belongsTo(User::class, 'doctor_id');
     }
-
-    // Define the relationship with the Patient model
+    
     public function patient()
     {
-        return $this->belongsTo(user::class, 'patient_id', 'id');
+        return $this->belongsTo(User::class, 'patient_id');
     }
+    
+    public function hour()
+    {
+        return $this->belongsTo(AvailableHour::class, 'hour_id');
+    }
+    // Appointment.php
+
+
+
 }

@@ -55,4 +55,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+    public function doctorAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'doctor_id');
+    }
+
+    public function patientAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'patient_id');
+    }
 }

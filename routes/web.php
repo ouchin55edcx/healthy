@@ -100,3 +100,8 @@ Route::delete('/medicaments/{id}', [MedicamentController::class, 'destroy'])->na
 // In routes/web.php
 Route::get('/medicaments/{id}/edit', [MedicamentController::class, 'edit'])->name('medicaments.edit');
 Route::put('/medicaments/{id}', [MedicamentController::class, 'update'])->name('medicaments.update');
+
+
+
+//doctor
+Route::post('/medications', [DoctorController::class, 'store'])->name('medications.store');
