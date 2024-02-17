@@ -140,73 +140,77 @@
                 <button type="submit">Add Medicament</button>
             </form>
 
-<!-- Displayed Medicaments -->
-<div x-data="{ modals: {} }">
-    @foreach ($medicaments as $medicament)
-        <div class="medicament mt-4 border-t border-gray-300 pt-4">
-            <div class="flex justify-between items-center">
-                <p class="text-lg font-semibold">{{ $medicament->medicamentName }}</p>
-                <div class="flex space-x-2">
-                    <button @click="modals['{{ $medicament->id }}'] = true"
-                        class="button bg-yellow-500 text-white hover:bg-yellow-700 px-3 py-1 rounded">
-                        Edit
-                    </button>
-                    <form action="{{ route('medicaments.destroy', ['id' => $medicament->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="button bg-red-500 text-white hover:bg-red-700 px-3 py-1 rounded">
-                            Delete
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
+            <!-- Displayed Medicaments -->
+            <div x-data="{ modals: {} }">
+                @foreach ($medicaments as $medicament)
+                    <div class="medicament mt-4 border-t border-gray-300 pt-4">
+                        <div class="flex justify-between items-center">
+                            <p class="text-lg font-semibold">{{ $medicament->medicamentName }}</p>
+                            <div class="flex space-x-2">
+                                <button @click="modals['{{ $medicament->id }}'] = true"
+                                    class="button bg-yellow-500 text-white hover:bg-yellow-700 px-3 py-1 rounded">
+                                    Edit
+                                </button>
+                                <form action="{{ route('medicaments.destroy', ['id' => $medicament->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="button bg-red-500 text-white hover:bg-red-700 px-3 py-1 rounded">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
-        <div x-show="modals['{{ $medicament->id }}']" class="fixed inset-0 z-50 overflow-auto bg-smoke">
-            <div x-show="modals['{{ $medicament->id }}']" class="fixed inset-0 transition-opacity"
-                x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modals['{{ $medicament->id }}'] = false">
-            </div>
-
-            <div x-show="modals['{{ $medicament->id }}']" class="fixed inset-0 flex items-center justify-center">
-                <div class="bg-white p-8 mx-4 rounded-lg max-w-md w-full">
-                    <h2 class="text-2xl font-bold mb-4">Edit Medicament</h2>
-                    <form action="#" method="POST">
-                        <!-- CSRF token goes here -->
-                        <input type="text" name="medicamentName"
-                            x-model="modals['{{ $medicament->id }}'].editedMedicament"
-                            class="input border border-gray-300 rounded mb-4 w-full px-3 py-2">
-
-                        <div class="flex flex-col">
-                            <label for="editSpecialty" class="text-sm font-medium text-gray-700 mb-1">Specialty:</label>
-                            <select id="editSpecialty" name="editSpecialty"
-                                x-model="modals['{{ $medicament->id }}'].editedSpecialtyId"
-                                class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
-                                <!-- Dynamically populate options based on available specialties -->
-                                @foreach ($specialities as $specialty)
-                                    <option value="{{ $specialty->id }}">{{ $specialty->specialtyName }}</option>
-                                @endforeach
-                            </select>
+                    <div x-show="modals['{{ $medicament->id }}']" class="fixed inset-0 z-50 overflow-auto bg-smoke">
+                        <div x-show="modals['{{ $medicament->id }}']" class="fixed inset-0 transition-opacity"
+                            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+                            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                            @click="modals['{{ $medicament->id }}'] = false">
                         </div>
 
-                        <div class="flex justify-end">
-                            <button @click="modals['{{ $medicament->id }}'] = false"
-                                class="button bg-gray-500 text-white hover:bg-gray-700 px-3 py-1 rounded mr-2">
-                                Cancel
-                            </button>
-                            <button type="submit"
-                                class="button bg-blue-500 text-white hover:bg-blue-700 px-3 py-1 rounded">
-                                Update
-                            </button>
+                        <div x-show="modals['{{ $medicament->id }}']"
+                            class="fixed inset-0 flex items-center justify-center">
+                            <div class="bg-white p-8 mx-4 rounded-lg max-w-md w-full">
+                                <h2 class="text-2xl font-bold mb-4">Edit Medicament</h2>
+                                <form action="{{ route('medicaments.update', ['id' => $medicament->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <label for="medicamentName">Medicament Name:</label>
+                                    <input type="text" name="medicamentName"
+                                        value="{{ $medicament->medicamentName }}" required>
+
+                                    <div class="flex flex-col mt-4">
+                                        <label for="speciality_id"
+                                            class="text-sm font-medium text-gray-700 mb-1">Specialty:</label>
+                                        <select id="speciality_id" name="speciality_id"
+                                            class="input border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                                            required>
+                                            @foreach ($specialities as $speciality)
+                                                <option value="{{ $speciality->id }}"
+                                                    @if ($speciality->id === $medicament->speciality_id) selected @endif>
+                                                    {{ $speciality->specialtyName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="flex justify-end mt-4">
+                                        <button type="submit"
+                                            class="button bg-blue-500 text-white hover:bg-blue-700 px-3 py-1 rounded">
+                                            Update
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                @endforeach
             </div>
-        </div>
-    @endforeach
-</div>
 
 
         </div>

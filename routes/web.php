@@ -97,3 +97,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::post('/medicaments', [MedicamentController::class, 'store'])->name('medicaments.store');
 //delete
 Route::delete('/medicaments/{id}', [MedicamentController::class, 'destroy'])->name('medicaments.destroy');
+// In routes/web.php
+Route::get('/medicaments/{id}/edit', [MedicamentController::class, 'edit'])->name('medicaments.edit');
+Route::put('/medicaments/{id}', [MedicamentController::class, 'update'])->name('medicaments.update');
