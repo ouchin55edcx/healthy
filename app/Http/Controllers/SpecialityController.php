@@ -47,7 +47,7 @@ class SpecialityController extends Controller
      */
     public function edit(Speciality $speciality)
     {
-        //
+        return view('specialties.edit', compact('speciality'));
     }
 
     /**
@@ -55,7 +55,15 @@ class SpecialityController extends Controller
      */
     public function update(Request $request, Speciality $speciality)
     {
-        //
+        $request->validate([
+            'specialtyName' => 'required|string|max:255',
+        ]);
+
+        $speciality->update([
+            'specialtyName' => $request->input('specialtyName'),
+        ]);
+
+        return redirect()->route('dashboard');
     }
 
     /**

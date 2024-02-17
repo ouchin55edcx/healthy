@@ -83,7 +83,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/specialties/{speciality}', [SpecialityController::class, 'destroy'])->name('specialties.destroy');
-
 });
-
-
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/specialties/{speciality}/edit', [SpecialityController::class, 'edit'])->name('specialties.edit');
+});
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::put('/specialties/{speciality}', [SpecialityController::class, 'update'])->name('specialities.update');
+});
