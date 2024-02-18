@@ -110,3 +110,6 @@ Route::post('/medications', [DoctorController::class, 'store'])->name('medicatio
 // generate-certificate
 Route::match(['get', 'post'], '/certificate/{patient_id}/{doctor_id}', [CertificateController::class, 'index'])
     ->name('doctor.certificate');
+
+Route::match(['get', 'post'], '/generate-certificate/{patientId}/{doctorId}', [CertificateController::class, 'generateCertificate'])
+    ->name('generate-certificate');

@@ -51,14 +51,14 @@
                                             method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
-                                                class="text-red-500 hover:underline">Delete</button>
+                                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="2" class="py-2 px-4 border-b text-center">No medications available</td>
+                                    <td colspan="2" class="py-2 px-4 border-b text-center">No medications available
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -93,21 +93,100 @@
                                     <footer class="text-gray-500 mt-2 text-sm">
                                         Created at: {{ $appointment->created_at->format('l H:i') }}
                                     </footer>
-                                    <form action="{{ route('doctor.certificate', ['patient_id' => $appointment->patient_id, 'doctor_id' => $appointment->doctor_id]) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
-                                            Generate Certificate
-                                        </button>
-                                    </form>
+
+                                    <button type="submit"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                                        onclick="showCertificatePopup()">
+                                        Generate Certificate
+                                    </button>
+
                                 </div>
-                            </article>
-                        </li>
-                    @endforeach
-                </ul>
-            </section>
+                                <!-- Popup HTML -->
+                                <div id="certificatePopup" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 hidden">
+                                    <form
+                                    action="{{ route('generate-certificate', ['patientId' => $appointment->patient_id, 'doctorId' => $appointment->doctor_id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <div class="bg-white border rounded-lg shadow-lg p-8 max-w-md mx-auto mt-8">
+                                            <h1 class="font-bold text-3xl mb-4 text-center text-blue-600">Medical
+                                                Certificate</h1>
+                                            <hr class="mb-4 border-t-2 border-blue-600">
+                                            <div class="mb-6">
+                                                <h2 class="text-lg font-bold mb-2">Certificate Details</h2>
+                                                <div class="flex justify-between text-gray-700">
+                                                    <div>Date: {{ now()->format('m/d/Y') }}</div>
+                                                    <div>Certificate #: CERT12345</div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-8">
+                                                <h2 class="text-lg font-bold mb-2">Doctor Information:</h2>
+                                                <div class="text-gray-700 mb-2">Doctor: #</div>
+                                                <div class="text-gray-700 mb-2">Specialty: #</div>
+                                            </div>
+                                            <div class="mb-8">
+                                                <h2 class="text-lg font-bold mb-2">Patient Information:</h2>
+                                                <div class="text-gray-700 mb-2">Patient: #</div>
+                                            </div>
+                                            <div class="table w-full mb-8">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-left font-bold text-gray-700">Description</th>
+                                                        <th class="text-right font-bold text-gray-700">Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Number of Days Input -->
+                                                    <tr>
+                                                        <td class="text-left text-gray-700">Number of Days</td>
+                                                        <td class="text-right">
+                                                            <input type="number" name="number_of_days"
+                                                                class="border rounded-md px-3 py-2 w-full"
+                                                                placeholder="Enter number of days" />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </div>
+                                            <div class="text-gray-700 mb-4">This certificate is issued to acknowledge
+                                                the medical services provided.</div>
+                                            <div class="text-gray-700 text-sm">Thank you for choosing our medical
+                                                services.</div>
 
+                                            <!-- Print Certificate Button -->
+                                            <div class="flex justify-end mt-4">
+                                                <button type="submit"
+                                                    class="bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                                    Send Certificate
+                                                </button>
+                                                <!-- Cancel button -->
+                                                <button onclick="hideCertificatePopup()"
+                                                    class="text-blue-500 hover:underline mt-4">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
 
-        </main>
+                                </div>
+    </div>
+    </div>
+    </article>
+    </li>
+    @endforeach
+    </ul>
+    </section>
+    </main>
     </div>
 
 </x-app-layout>
+
+<script>
+    function showCertificatePopup() {
+        // Show the certificate popup
+        const popup = document.getElementById('certificatePopup');
+        popup.classList.remove('hidden');
+    }
+
+    function hideCertificatePopup() {
+        // Hide the certificate popup
+        const popup = document.getElementById('certificatePopup');
+        popup.classList.add('hidden');
+    }
+</script>
